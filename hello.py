@@ -6,6 +6,11 @@ print(output)
 # del output
 output = None
 
+things = ["yay", "yes", "no", "nope"]
+
+for thing in things:
+  print(thing)
+
 if bool(output) == False:
   print("What happened to my message?")
 elif output:
