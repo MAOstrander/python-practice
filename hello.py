@@ -4,6 +4,7 @@ output = name + " says: " + msg
 print(output)
 
 # del output
+output = None
 
 if bool(output) == False:
   print("What happened to my message?")
