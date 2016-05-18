@@ -1,4 +1,4 @@
-name = "Mathew Ostrander"
+name = input("What is your name? ")
 msg = "Hello World!"
 output = name + " says: " + msg
 print(output)
