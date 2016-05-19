@@ -11,9 +11,12 @@ things = ["yay", "yes", "no", "nope"]
 for thing in things:
   print(thing)
 
-if bool(output) == False:
-  print("What happened to my message?")
-elif output:
-  print("I already said something")
-else:
-  print("How did you get here?")
+def check_message_status():
+  if bool(output) == False:
+    print("What happened to my message?")
+  elif output:
+    print("I already said something")
+  else:
+    print("How did you get here?")
+
+check_message_status()
