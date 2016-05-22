@@ -12,8 +12,11 @@ while True:
 #   # Compare the guess to the random number
   if guess==answer:
     break
-
+  elif guess > answer:
   # Let the player the result of the comparison
-  print("Sorry, try again.")
+    print("Sorry, your guess was too high. Try again.")
+  elif guess < answer:
+    print("Sorry, your guess was too low. Try again.")
+
 
 print("You got it!!!")
