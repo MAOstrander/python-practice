@@ -12,7 +12,10 @@ while True:
   try:
     guess = int(guess)
     # Compare the guess to the random number
-    if guess==answer:
+    if guess < 1 or guess > 10:
+      print("Hey, something between 1 and 10 please!")
+
+    elif guess==answer:
       break
     elif guess > answer:
     # Let the player the result of the comparison
