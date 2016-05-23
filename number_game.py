@@ -6,17 +6,21 @@ print(answer)
 
 while True:
 
-#   # Let the player guess a number
-  guess = int(raw_input("Guess a number between 1 and 10: "))
+  # Let the player guess a number
+  guess = raw_input("Guess a number between 1 and 10: ")
 
-#   # Compare the guess to the random number
-  if guess==answer:
-    break
-  elif guess > answer:
-  # Let the player the result of the comparison
-    print("Sorry, your guess was too high. Try again.")
-  elif guess < answer:
-    print("Sorry, your guess was too low. Try again.")
+  try:
+    guess = int(guess)
+    # Compare the guess to the random number
+    if guess==answer:
+      break
+    elif guess > answer:
+    # Let the player the result of the comparison
+      print("Sorry, your guess was too high. Try again.")
+    elif guess < answer:
+      print("Sorry, your guess was too low. Try again.")
 
+  except ValueError:
+    print("That's not a number!")
 
 print("You got it!!!")
