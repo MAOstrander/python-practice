@@ -30,6 +30,10 @@ def game():
   else:
     print("You lost!")
 
+  play_again = raw_input("Do you want to play again? Y/n ")
+  if play_again.lower() != 'n':
+    game()
+
 
 
 game()
