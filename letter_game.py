@@ -16,12 +16,25 @@ def game():
       else:
         print('_', end='')
     print('')
-    print(answer)
+    print('Incorrect Guesses: {}/5'.format(len(incorrect)))
+    print('')
 
-    guess = raw_input("Try to guess a letter in the mystery word. ")
+    guess = raw_input("Try to guess a letter in the mystery word. ").lower()
 
+    if (len(guess) != 1):
+      print("Please only guess a single letter")
+      continue
+    elif guess in correct or guess in incorrect:
+      print("You've already guessed that!")
+      continue
+    elif not guess.isalpha():
+      print("This is a letter game, please only guess letters.")
+      continue
 
-    correct.append(guess)
+    if guess in answer:
+      correct.append(guess)
+    else:
+      incorrect.append(guess)
 
     print(correct)
 
