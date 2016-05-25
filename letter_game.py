@@ -8,7 +8,7 @@ def game():
   correct = []
   incorrect = []
 
-  while len(incorrect) < 5 and len(correct) != len(list(answer)):
+  while len(incorrect) < 5 and len(correct) != len(set(answer)):
 
     for letter in answer:
       if letter in correct:
@@ -33,10 +33,15 @@ def game():
 
     if guess in answer:
       correct.append(guess)
+      if len(correct) == len(set(answer)):
+        print("You win! The word was {}!".format(answer))
+        break
     else:
       incorrect.append(guess)
 
     print(correct)
+  else:
+    print("You lost. :( The word was {}!".format(answer))
 
 
 
