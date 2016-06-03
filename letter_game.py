@@ -55,7 +55,7 @@ def game(done):
       correct.append(guess)
       found = True
       for letter in answer:
-        if letter not in answer:
+        if letter not in correct:
           found = False
       if found:
         print("YOU WIN! ^.^")
