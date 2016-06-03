@@ -1,6 +1,9 @@
 from __future__ import print_function
 import random
 import os
+import sys
+
+wordbank = ["bulbasaur", "ivysaur", "venasaur", "squirtle", "wortortle", "blastoise", "charmander", "charmeleon", "charizard"]
 
 def clear():
   if os.name == 'nt':
@@ -8,65 +11,83 @@ def clear():
   else:
     os.system('clear')
 
-def validate(correct, incorrect, guess):
-  if guess == '':
-    print("Try to guess the word!")
-  elif (len(guess) > 1):
-    print("Please only guess a single letter")
-    return False
-  elif guess in correct or guess in incorrect:
-    print("You've already guessed that!")
-    return False
-  elif not guess.isalpha():
-    print("This is a letter game, please only guess letters.")
-    return False
-  return True
-
-def display_game(correct, incorrect, answer, guess):
+def display_game(correct, incorrect, answer):
   clear()
-  if validate(correct, incorrect, guess):
-    return False
+  print('Incorrect Guesses: {}/6'.format(len(incorrect)))
   print('')
-  print('')
-  print('')
+  for letter in incorrect:
+    print(letter, end=' ')
+  print('\n\n')
+
   for letter in answer:
     if letter in correct:
       print(letter, end='')
     else:
       print('_', end='')
   print('')
-  print("Bad letters: {}".format(incorrect))
-  print('Incorrect Guesses: {}/5'.format(len(incorrect)))
 
-def game():
-  wordbank = ["bulbasaur", "ivysaur", "venasaur", "squirtle", "wortortle", "blastoise", "charmander", "charmeleon", "charizard"]
+def validate(correct, incorrect):
+  while True:
+    guess = raw_input("Try to guess a letter in the mystery word. ").lower()
+    if guess == '':
+      print("Try to guess the word!")
+    elif (len(guess) > 1):
+      print("Please only guess a single letter")
+    elif guess in correct or guess in incorrect:
+      print("You've already guessed that!")
+    elif not guess.isalpha():
+      print("This is a letter game, please only guess letters.")
+    else:
+      return guess
 
+
+def game(done):
+  clear()
   answer = random.choice(wordbank)
   correct = []
   incorrect = []
 
-  lets_play = raw_input("Press ENTER to play or Q to quit ")
-  if lets_play.lower() != "q":
-    while len(incorrect) < 5 and len(correct) != len(set(answer)):
+  while True:
+    display_game(correct, incorrect, answer)
+    guess = validate(correct, incorrect)
 
-      display_game(correct, incorrect, answer, "")
-
-      guess = raw_input("Try to guess a letter in the mystery word. ").lower()
-      if display_game(correct, incorrect, answer, guess):
-        break
-
-      if guess in answer:
-        correct.append(guess)
-        if len(correct) == len(set(answer)):
-          print("You win! The word was {}!".format(answer))
-          break
-      else:
-        incorrect.append(guess)
-
+    if guess in answer:
+      correct.append(guess)
+      found = True
+      for letter in answer:
+        if letter not in answer:
+          found = False
+      if found:
+        print("YOU WIN! ^.^")
+        print("You win! The word was {}!".format(answer))
+        done = True
     else:
-      print("You lost. :( The word was {}!".format(answer))
+      incorrect.append(guess)
+      if len(incorrect) == 6:
+        display_game(correct, incorrect, answer)
+        print("You lost. :( The word was {}!".format(answer))
+        done = True
 
+    if done:
+      again = raw_input("Play again? Y/n ").lower()
+      if again != "n":
+        return game(done=False)
+      else:
+        sys.exit()
 
+def welcome():
+  start = raw_input("Press any key to start or Q to quit ").lower()
+  if start == "q":
+    print("Bye!")
+    sys.exit()
+  else:
+    return True
 
+print("Welcome to Word Guesser!")
+done=False
 
-game()
+while True:
+  clear()
+  welcome()
+  game(done)
+
