@@ -18,16 +18,25 @@ show_help()
 while True:
   new_stuff = raw_input("> ")
 
-  if new_stuff == "DONE":
+  if (new_stuff == "DONE"):
     print("\nHere's your list:")
     show_list()
     break
-  elif new_stuff == "HELP":
+  elif (new_stuff == "HELP"):
     show_help()
     continue
-  elif new_stuff == "SHOW":
+  elif (new_stuff == "SHOW"):
     show_list()
     continue
   else:
     new_list = new_stuff.split(",")
-    index = raw_input("Do you want to reorder your list? Press enter to put item at the end of list. Type a number and hit enter to put item at that spot.\n You have {} item(s) in your list.".format(len(shopping_list)))
+    index = raw_input("Do you want to order your list? Press enter to put item at the end of list. Type a number and hit enter to put item at that spot.\n You have {} item(s) in your list.".format(len(shopping_list)))
+    if index:
+      place = int(index) - 1
+      for item in new_list:
+        shopping_list.insert(place, item.strip())
+        place += 1
+    else:
+      for item in new_list:
+        shopping_list.append(item.strip())
+
