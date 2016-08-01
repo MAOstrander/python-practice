@@ -32,4 +32,17 @@ def stringer(test_string):
   return up,down,titled,rever
 
 answer = stringer("MATHew OstrAnder")
+
+
+print "Smooshing two iterables together"
+def combo(iter1, iter2):
+  smooshed = [];
+  for (index, value) in enumerate(iter1):
+    print iter2[index]
+    print value
+    smooshed.append((value,iter2[index]))
+  return smooshed
+
+
+answer = combo('abc','gef')
 print answer
